@@ -1,0 +1,59 @@
+{
+	"name": "y4m",
+	"type": "module",
+	"main": "index.js",
+	"license": "MIT",
+	"description": "A stream-based YUV4MPEG2 (y4m) fast encoder and decoder.",
+	"prettier": "@typescord/prettier-config",
+	"scripts": {
+		"build": "tsc",
+		"check-types": "tsc --noEmit",
+		"test": "tap --node-arg=--loader=ts-node/esm",
+		"format": "prettier . --write",
+		"lint": "eslint . --ext js,ts",
+		"lint-fix": "npm run lint -- --fix"
+	},
+	"engines": {
+		"node": ">=12.0.0"
+	},
+	"version": "0.0.0",
+	"author": "Mesteery <mestery@pm.me>",
+	"repository": "git+https://github.com/Mesteery/y4m.git",
+	"homepage": "https://github.com/Mesteery/y4m#readme",
+	"bugs": {
+		"url": "https://github.com/Mesteery/y4m/issues"
+	},
+	"keywords": [
+		"y4m",
+		"yuv4mpeg2",
+		"encoder",
+		"decoder",
+		"stream"
+	],
+	"files": [
+		"build"
+	],
+	"devDependencies": {
+		"@types/node": "^16.6.1",
+		"@types/tap": "^15.0.5",
+		"@typescord/eslint-config": "^0.4.0",
+		"@typescord/prettier-config": "^0.1.2",
+		"@typescript-eslint/eslint-plugin": "^4.29.2",
+		"@typescript-eslint/parser": "^4.29.2",
+		"eslint": "^7.32.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-import-resolver-node": "^0.3.6",
+		"eslint-plugin-import": "^2.24.0",
+		"eslint-plugin-prettier": "^4.0.0",
+		"eslint-plugin-simple-import-sort": "^7.0.0",
+		"eslint-plugin-sonarjs": "^0.10.0",
+		"eslint-plugin-unicorn": "^37.0.1",
+		"prettier": "^2.3.2",
+		"tap": "^15.0.10",
+		"ts-node": "^10.4.0",
+		"typescript": "~4.4.4"
+	},
+	"volta": {
+		"node": "16.13.0"
+	}
+}
