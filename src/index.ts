@@ -509,11 +509,12 @@ export class Decoder<HeaderReady = false> extends Transform {
 	}
 
 	public _final(callback: TransformCallback) {
-		this.#cleanup();
 		if (!this.header || this.#frame) {
+			this.#cleanup();
 			callback(new Error('Not finished'));
 			return;
 		}
+		this.#cleanup();
 		callback();
 	}
 
