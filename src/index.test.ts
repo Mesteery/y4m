@@ -99,7 +99,6 @@ tap.test('header', async (t) => {
 				height: 1,
 				width: 1,
 				frameRate: new Ratio(1, 1),
-				comment: ' ',
 			}),
 		/illegal/,
 	);

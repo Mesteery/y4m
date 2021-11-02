@@ -48,12 +48,6 @@ export interface HeaderOptions {
 	 * @default 'C420'
 	 */
 	colourSpace?: ColourSpaces;
-	/**
-	 * The optional comment in the header.
-	 * It cannot contain spaces or
-	 * the TERMINATOR char (`'\x0A'`).
-	 */
-	comment?: string;
 }
 
 export class Header {
@@ -84,12 +78,6 @@ export class Header {
 	 * @default 'C420'
 	 */
 	public colourSpace: ColourSpace;
-	/**
-	 * The optional comment in the header.
-	 * It cannot contain spaces or
-	 * the TERMINATOR char (`'\x0A'`).
-	 */
-	public comment: string | undefined;
 
 	public constructor({
 		width,
@@ -98,7 +86,6 @@ export class Header {
 		interlacing = 'p',
 		aspectRatio = new Ratio(0, 0),
 		colourSpace = 'C420',
-		comment,
 	}: HeaderOptions) {
 		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 		if (!width || !height || !frameRate) {
@@ -107,23 +94,16 @@ export class Header {
 		if (!INTERLACING_MODES.includes(interlacing)) {
 			throw new Error('Invalid header: interlacing mode is invalid.');
 		}
-		if (comment && (comment.includes(String.fromCharCode(TERMINATOR)) || comment.includes(FIELD_SEPARATOR))) {
-			throw new Error('Invalid header: comment contains illegal characters.');
-		}
 		this.width = width;
 		this.height = height;
 		this.frameRate = frameRate;
 		this.interlacing = interlacing;
 		this.aspectRatio = aspectRatio;
 		this.colourSpace = new ColourSpace(colourSpace, width * height);
-		this.comment = comment;
 	}
 
 	public toString() {
-		return (
-			`W${this.width} H${this.height} F${this.frameRate} I${this.interlacing} A${this.aspectRatio} ${this.colourSpace}` +
-			(this.comment ? ` X${this.comment}` : '')
-		);
+		return `W${this.width} H${this.height} F${this.frameRate} I${this.interlacing} A${this.aspectRatio} ${this.colourSpace}`;
 	}
 }
 
@@ -369,9 +349,6 @@ export class Decoder<HeaderReady = false> extends Transform {
 					break;
 				case 'C':
 					parameters.colourSpace = parameter;
-					break;
-				case 'X':
-					parameters.comment = v;
 					break;
 			}
 		}
