@@ -335,7 +335,7 @@ export class Decoder<HeaderReady = false> extends Transform {
 	 * Only available after the `'header'` event
 	 * (and obviously in `'data'`, `'readable'`, `'close'`, and `'end'` events).
 	 */
-	public header!: HeaderReady extends true ? Header : Header | undefined;
+	public header?: HeaderReady extends true ? Header : Header | undefined;
 
 	public constructor({ maxFrameSize, ...transformOptions }: DecoderOptions = {}) {
 		transformOptions.readableObjectMode = true;
